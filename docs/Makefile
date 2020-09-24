@@ -1,4 +1,4 @@
-INPUTS = index.md concepts.md
+INPUTS = index.md concepts.md security.md migration.md
 # index.html concepts.html reference.html security.html migration.html whats_new.html
 
 all: $(INPUTS:.md=.html)
@@ -15,6 +15,7 @@ tmp_menu.html: $(INPUTS)
 	sed '1 s!#!%!' $< | \
 	pandoc -s -f markdown -t html5 -c lsr.css --toc --toc-depth=3 \
 	 --variable 'header-includes=<link href="favicon.ico" type="image/x-icon" rel="shortcut icon" />' \
+	 --indented-code-classes=c \
 	 -o $@
 	sed -i 's!<nav[^>]*>!\0<b>Contents:</b>!' $@
 	sed -i '/<nav/e cat tmp_menu.html' $@
