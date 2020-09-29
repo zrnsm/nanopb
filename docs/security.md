@@ -1,5 +1,4 @@
-Nanopb: Security model
-======================
+# Nanopb: Security model
 
 Importance of security in a Protocol Buffers library
 ----------------------------------------------------

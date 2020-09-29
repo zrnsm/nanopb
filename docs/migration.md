@@ -1,5 +1,4 @@
-Nanopb: Migration from older versions
-=====================================
+# Nanopb: Migration from older versions
 
 This document details all the breaking changes that have been made to
 nanopb since its initial release. For each change, the rationale and
