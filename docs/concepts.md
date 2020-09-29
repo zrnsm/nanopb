@@ -522,8 +522,8 @@ message MyMessage {
 ~~~~
 
 Nanopb will generate both static and runtime initialization for the
-default values. In `myproto.pb.h` there will be a [\#define
-MyMessage_init_default]{.title-ref} that can be used to initialize
+default values. In `myproto.pb.h` there will be a
+`#define MyMessage_init_default {...}` that can be used to initialize
 whole message into default values:
 
     MyMessage msg = MyMessage_init_default;

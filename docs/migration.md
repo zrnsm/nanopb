@@ -147,8 +147,7 @@ instead of the array size.
 **Required actions:** If your strings were previously filling the whole
 allocated array, increase the size of the field by 1.
 
-**Error indications:** `pb_encode()` returns error *unterminated
-string*.
+**Error indications:** `pb_encode()` returns error `unterminated string`.
 
 ### Removal of per-field default value constants
 
@@ -164,12 +163,11 @@ message.
 
 **Required actions:** If your code previously used default constants, it
 will have to be adapted to take the default value in some other way,
-such as by accessing [static const MyMessage msg_default =
-MyMessage_init_default;]{.title-ref} and
+such as by defining
+`static const MyMessage msg_default = MyMessage_init_default;` and accessing
 `msg_default.fieldname`.
 
-**Error indications:** Compiler error about
-`fieldname_default` being undeclared.
+**Error indications:** Compiler error about `fieldname_default` being undeclared.
 
 ### Zero tag in message now raises error by default
 
@@ -191,8 +189,7 @@ there are also `pb_decode_nullterminated()` and
 `pb_encode_nullterminated()` macros, which work both in
 0.4.0 and 0.3.9.
 
-**Error indications:** Error message from `pb_decode()`:
-'zero_tag'.
+**Error indications:** Error message from `pb_decode()`: `zero_tag`.
 
 ### Submessages now have has_field in proto3 mode
 

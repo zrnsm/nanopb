@@ -331,15 +331,14 @@ Part of a message structure, for fields with type PB_HTYPE_CALLBACK:
 A pointer to the *arg* is passed to the callback when calling. It can be
 used to store any information that the callback might need. Note that
 this is a double pointer. If you set `field.arg` to point to
-[&data]{.title-ref} in your main code, in the callback you can access it
-like this:
+`&data` in your main code, in the callback you can access it like this:
 
     myfunction(*arg);           /* Gives pointer to data as argument */
     myfunction(*(data_t*)*arg); /* Gives value of data as argument */
     *arg = newdata;             /* Alters value of field.arg in structure */
 
-When calling [pb_encode](#pb_encode), *funcs.encode* is used, and
-similarly when calling [pb_decode](#pb_decode), *funcs.decode* is used.
+When calling [pb_encode](#pb_encode), `funcs.encode` is used, and
+similarly when calling [pb_decode](#pb_decode), `funcs.decode` is used.
 The function pointers are stored in the same memory location but are of
 incompatible types. You can set the function pointer to NULL to skip the
 field.

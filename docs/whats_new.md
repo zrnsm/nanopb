@@ -137,7 +137,7 @@ to a custom structure or C++ class type. You could have a bunch of other
 fields in the structure and even the datatypes can be different to an
 extent, and nanopb will automatically detect the size and position of
 each field. The generated `.pb.c` files now just have calls of
-[PB_BIND(msgname, structname, width)]{.title-ref}. Adding a similar
+`PB_BIND(msgname, structname, width)`. Adding a similar
 call to your own code will bind the message to your own structure.
 
 ### UTF-8 validation
