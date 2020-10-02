@@ -16,5 +16,8 @@ tmp_menu.html: $(INPUTS)
 	 --variable 'header-includes=<link href="favicon.ico" type="image/x-icon" rel="shortcut icon" />' \
 	 --indented-code-classes=c \
 	 -o $@
+	sed -i '/<nav/e cat feedback.html' $@
+	sed -i 's/doc_page_name_placeholder/$</' $@
 	sed -i 's!<nav[^>]*>!\0<b>Contents:</b>!' $@
 	sed -i '/<nav/e cat tmp_menu.html' $@
+

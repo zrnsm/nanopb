@@ -203,3 +203,30 @@ table td, table th {
   border-bottom: 1px solid #aaa;
   font-weight: bold;
 }
+
+#feedback_link {
+  float: right;
+}
+
+#feedback {
+  visibility: hidden;
+  padding: 1em;
+  border-radius: 5px;
+  position: fixed;
+  top: 10em;
+  right: 10em;
+  background: white;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-bottom: 2px solid #555;
+  border-right: 2px solid #555;
+}
+
+#feedback:target {
+  visibility: visible;
+}
+
+#feedback .cancel {
+  color: #666;
+  padding-left: 2em;
+}
