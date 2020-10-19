@@ -16,6 +16,14 @@ import shutil
 import os
 from functools import reduce
 
+# PEP 366 package name setting to allow relative imports in Python 3
+# https://stackoverflow.com/questions/2943847/nightmare-with-relative-imports-how-does-pep-366-work
+if __name__ == "__main__" and __package__ is None:
+    nanopb_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, nanopb_dir)
+    import generator
+    __package__ = str("generator")
+
 try:
     # Add some dummy imports to keep packaging tools happy.
     import google, distutils.util # bbfreeze seems to need these
@@ -40,43 +48,28 @@ try:
     import google.protobuf.descriptor
 except:
     sys.stderr.write('''
-         *************************************************************
-         *** Could not import the Google protobuf Python libraries ***
-         *** Try installing package 'python3-protobuf' or similar.  ***
-         *************************************************************
+         **********************************************************************
+         *** Could not import the Google protobuf Python libraries          ***
+         ***                                                                ***
+         *** Easiest solution is often to install the dependencies via pip: ***
+         ***    pip install protobuf grpcio-tools                           ***
+         **********************************************************************
     ''' + '\n')
     raise
 
 try:
     from .proto import nanopb_pb2
     from .proto._utils import invoke_protoc
-except TypeError:
-    sys.stderr.write('''
-         ****************************************************************************
-         *** Got TypeError when importing the protocol definitions for generator. ***
-         *** This usually means that the protoc in your path doesn't match the    ***
-         *** Python protobuf library version.                                     ***
-         ***                                                                      ***
-         *** Please check the output of the following commands:                   ***
-         *** which protoc                                                         ***
-         *** protoc --version                                                     ***
-         *** python3 -c 'import google.protobuf; print(google.protobuf.__file__)'  ***
-         *** If you are not able to find the python protobuf version using the    ***
-         *** above command, use this command.                                     ***
-         *** pip freeze | grep -i protobuf                                        ***
-         ****************************************************************************
-    ''' + '\n')
-    raise
-except (ValueError, SystemError, ImportError):
-    # Probably invoked directly instead of via installed scripts.
-    from proto import nanopb_pb2
-    from proto._utils import invoke_protoc
 except:
     sys.stderr.write('''
-         ********************************************************************
-         *** Failed to import the protocol definitions for generator.     ***
-         *** You have to run 'make' in the nanopb/generator/proto folder. ***
-         ********************************************************************
+         *******************************************************************************
+         *** Got an exception when importing the protocol definitions for generator. ***
+         *** This usually means that the protoc in your path doesn't match the       ***
+         *** Python protobuf library version.                                        ***
+         ***                                                                         ***
+         *** Easiest solution is often to install the dependencies via pip:          ***
+         ***    pip install protobuf grpcio-tools                                    ***
+         *******************************************************************************
     ''' + '\n')
     raise
 

@@ -3,7 +3,16 @@
 import sys
 import os
 import os.path
-from nanopb_generator import invoke_protoc
+
+# PEP 366 package name setting to allow relative imports in Python 3
+# https://stackoverflow.com/questions/2943847/nightmare-with-relative-imports-how-does-pep-366-work
+if __name__ == "__main__" and __package__ is None:
+    nanopb_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, nanopb_dir)
+    import generator
+    __package__ = str("generator")
+
+from .proto._utils import invoke_protoc
 
 if __name__ == '__main__':
     # Add argument so that protoc-gen-nanopb gets found
