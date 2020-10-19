@@ -69,7 +69,7 @@ except TypeError:
     raise
 except (ValueError, SystemError, ImportError):
     # Probably invoked directly instead of via installed scripts.
-    import proto.nanopb_pb2 as nanopb_pb2
+    from proto import nanopb_pb2
     from proto._utils import invoke_protoc
 except:
     sys.stderr.write('''
