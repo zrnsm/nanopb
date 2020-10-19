@@ -57,33 +57,9 @@ except:
     ''' + '\n')
     raise
 
-try:
-    from .proto import nanopb_pb2
-    from .proto._utils import invoke_protoc
-except:
-    sys.stderr.write('''
-         *******************************************************************************
-         *** Got an exception when importing the protocol definitions for generator. ***
-         *** This usually means that the protoc in your path doesn't match the       ***
-         *** Python protobuf library version.                                        ***
-         ***                                                                         ***
-         *** Easiest solution is often to install the dependencies via pip:          ***
-         ***    pip install protobuf grpcio-tools                                    ***
-         *******************************************************************************
-    ''' + '\n')
-    raise
-
-try:
-    from tempfile import TemporaryDirectory
-except ImportError:
-    class TemporaryDirectory:
-        '''TemporaryDirectory fallback for Python 2'''
-        def __enter__(self):
-            self.dir = tempfile.mkdtemp()
-            return self.dir
-
-        def __exit__(self, *args):
-            shutil.rmtree(self.dir)
+from .proto import nanopb_pb2
+from .proto._utils import invoke_protoc
+from .proto import TemporaryDirectory
 
 # ---------------------------------------------------------------------------
 #                     Generation of single fields
